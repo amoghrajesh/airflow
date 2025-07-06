@@ -217,6 +217,11 @@ if __name__ == "__main__":
     node_lts_version = get_latest_lts_node_version()
     for file, keep_length in FILES_TO_UPDATE:
         console.print(f"[bright_blue]Updating {file}")
+        if file.name == ".pre-commit-config.yaml":
+            content = file.read_text()
+            if "https://github.com/Lucas-C/pre-commit-hooks" in content:
+                console.print(f"[yellow]Skipping {file} due to cadwyn pin")
+                continue
         file_content = file.read_text()
         new_content = file_content
         if UPGRADE_PIP:
