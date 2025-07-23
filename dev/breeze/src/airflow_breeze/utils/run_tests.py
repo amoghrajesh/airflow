@@ -109,8 +109,8 @@ def run_docker_compose_tests(
     pytest_args = ("--color=yes",)
 
     if test_type == "task-sdk-integration":
-        test_path = Path("tests") / "task_sdk_tests" / "test_task_sdk_health.py"
-        cwd = TASK_SDK_TESTS_ROOT_PATH.as_posix()
+        test_path = Path("task-sdk-tests") / "tests" / "task_sdk_tests" / "test_task_sdk_health.py"
+        cwd = AIRFLOW_ROOT_PATH.as_posix()  # Run from main airflow directory
 
         cmd = ["uv", "run", "python", "-m", "pytest", str(test_path), "-s", *pytest_args, *extra_pytest_args]
     else:  # docker-compose
